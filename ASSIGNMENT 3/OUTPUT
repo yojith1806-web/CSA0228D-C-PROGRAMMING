@@ -1,0 +1,25 @@
+== Complete-the-code output ==
+Book 1021 -> index 0, comparisons = 3
+Book 1305 -> index 5, comparisons = 3
+Book 1533 -> index 9, comparisons = 4
+Book 1400 -> index -1, comparisons = 4
+
+== 10-book trial: linear vs binary (comparisons) ==
+ key | linear | binary
+1021 |  1 (idx  0) | 3 (idx  0)
+1222 |  5 (idx  4) | 1 (idx  4)
+1305 |  6 (idx  5) | 3 (idx  5)
+1533 | 10 (idx  9) | 4 (idx  9)
+1400 | 10 (idx -1) | 4 (idx -1)
+
+== Scaling experiment (sorted array a[i]=2i; 2,000 random keys each) ==
+      n | lin succ | lin fail | bin succ | bin fail | bin worst | predicted lin (n+1)/2 | pred bin succ | worst floor(log2 n)+1
+   1000 |    503.4 |   1000.0 |     9.02 |     9.98 |        10 |                 500.5 |          8.97 | 10
+  10000 |   4992.5 |  10000.0 |    12.35 |    13.36 |        14 |                5000.5 |         12.29 | 14
+ 100000 |  50333.9 | 100000.0 |    15.66 |    16.67 |        17 |               50000.5 |         15.61 | 17
+
+== Alternative: hash table (linear probing, load 0.66) and interpolation search; random sorted keys in [0,10n) ==
+      n | hash probes hit | hash probes miss | interp. probes hit | binary comps hit | extra space hash (ints)
+   1000 |            1.70 |             3.52 |               3.29 |             8.92 | 1501
+  10000 |            1.73 |             3.88 |               3.68 |            12.29 | 15001
+ 100000 |            1.78 |             4.01 |               3.79 |            15.63 | 150001
